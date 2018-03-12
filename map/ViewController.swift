@@ -7,9 +7,15 @@
 //
 
 import UIKit
+import MapKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var map: MKMapView!
+    @IBOutlet weak var startButton: UIButton!
+    
+    @IBAction func action(_ sender: UIButton) {
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.

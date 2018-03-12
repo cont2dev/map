@@ -106,11 +106,12 @@
 			isa = PBXGroup;
 			children = (
 				289D25AA204E1D9C008038AD /* Supporting files */,
-				2879218E204D701500DED41C /* ViewController.swift */,
 				28792190204D701500DED41C /* Main.storyboard */,
 				28792198204D701500DED41C /* LaunchScreen.storyboard */,
+				2879218E204D701500DED41C /* ViewController.swift */,
 				289D25AF204EAA55008038AD /* event.swift */,
 				289D25B1204EB590008038AD /* trip.swift */,
+				2879219B204D701500DED41C /* Info.plist */,
 			);
 			path = map;
 			sourceTree = "<group>";
@@ -139,7 +140,6 @@
 				289D25AB204E1DD9008038AD /* Default-568h@2x.png */,
 				2879218C204D701500DED41C /* AppDelegate.swift */,
 				28792196204D701500DED41C /* Assets.xcassets */,
-				2879219B204D701500DED41C /* Info.plist */,
 				28792193204D701500DED41C /* map.xcdatamodeld */,
 			);
 			path = "Supporting files";

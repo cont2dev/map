@@ -10,20 +10,9 @@ import Foundation
 
 struct trip {
     var name:String
-    public var start:Date
+    var start:Date
     var status:tripStatus
-    var locations: Set<location>
-
-    mutating func startTrip(when time:Date) {
-        start = time
-    }
-    mutating func addLocation(here locate:location) {
-        locations.insert(locate)
-    }
-    
-    mutating func deleteLocation(here locate:location) {
-        locations.remove(locate)
-    }
+    var locations: [location]
 }
 
 enum tripStatus {
@@ -33,12 +22,5 @@ enum tripStatus {
     case garbage
 }
 
-struct location:Hashable {
-    var hashValue: Int
-    
-    static func ==(lhs: location, rhs: location) -> Bool {
-        return false
-    }
-    
-    
+struct location {
 }
