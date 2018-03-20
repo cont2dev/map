@@ -7,14 +7,47 @@
 //
 
 import Foundation
+import CoreLocation
 
-struct event {
-    let type:eventType
-    let start:Date
-    var end:Date
+class Start:commit {
+    var members = [Member]()
+    var type: eventType
+    let time:Date
+    
+    required init(_ members: [Member]) {
+        type = .start
+        time = Date()
+        if members.count > 0 {
+            self.members += members
+        }
+    }
+}
+
+class Route: commit {
+    var type: eventType
+    var members = [Member]()
+    var routes = [CLLocation]()
+    
+    required init(_ members: [Member]) {
+        type = .route
+        if members.count > 0 {
+            self.members += members
+        }
+    }
+    
+}
+
+protocol commit {
+    var type:eventType {get set}
+    var members:[Member] {get set}
+    init(_ members: [Member])
 }
 
 enum eventType {
+    case start
+    case end
+    case pause
+    case restart
     case route
     case photo
     case video

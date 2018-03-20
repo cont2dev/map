@@ -8,11 +8,16 @@
 
 import Foundation
 
-struct trip {
+struct Trip {
     var name:String
-    var start:Date
-    var status:tripStatus
-    var locations: [location]
+    //var status:tripStatus = .idle
+    var member = [Member]()
+    var commitList = [commit]()
+    
+    init(withName name:String = "default trip", with member:Member) {
+        self.name = name
+        self.member.append(member)
+    }
 }
 
 enum tripStatus {
@@ -23,4 +28,10 @@ enum tripStatus {
 }
 
 struct location {
+}
+
+struct Member
+{
+    let name:String
+    var address:String
 }
