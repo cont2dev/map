@@ -1,0 +1,3 @@
+[submodule "sequence_diagram"]
+	path = sequence_diagram
+	url = https://github.com/xiane/mapSequenceDiagram
