@@ -11,12 +11,17 @@ import Foundation
 class Monitor
 {
     var timer:Timer
+    let observer:mediaObserver
+
     
+    func startObserver() {
+        observer.startHooking()
+    }
     func startMonitor() {
-        
     }
     
     init() {
+        observer = mediaObserver()
         timer = Timer()
     }
 }

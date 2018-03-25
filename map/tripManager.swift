@@ -15,23 +15,26 @@ class TripManager
     var currentEvent:commit?
     
     var tracker:routeTracker
-    let observer:mediaObserver
     let monitor:Monitor
     
-    func startCommit() {
+    func createStartCommit() {
         currentEvent = git.createCommite(type: .start, with: (currentTrip?.member)!)
         currentTrip?.commitList.append(currentEvent!)
     }
     
-    func startTracking() {
+    func createRouteCommit() {
         currentEvent = git.createCommite(type: .route, with: (currentTrip?.member)!)
         currentTrip?.commitList.append(currentEvent!)
-        
+    }
+    
+    func startTracking() {
+        monitor.startObserver()
+        createRouteCommit()
+
         if let event = currentEvent {
             tracker.startTrcking(it: event as! Route)
+            monitor.startMonitor()
         }
-        
-        monitor.startMonitor()
     }
     
     func startTrip() {
@@ -39,17 +42,12 @@ class TripManager
         let trip = Trip(with:defaultMember)
         trips.append(trip)
         currentTrip = trip
-        
-        startCommit()
-        
+        createStartCommit()
         startTracking()
-        
-        observer.startHooking()
     }
     
     init() {
         tracker = routeTracker()
-        observer = mediaObserver()
         monitor = Monitor()
     }
 }
