@@ -10,7 +10,23 @@ import Foundation
 
 class routeTracker
 {
+    var tracking:Bool = true
+    var currentRoute:Route?
+    
+    func trackingLoop() {
+        
+    }
+    
     func startTrcking(it event:Route)
     {
+        tracking = true
+        currentRoute = event
+        while (tracking) {
+            trackingLoop()
+        }
+    }
+    
+    func stopTracking() {
+        tracking = false
     }
 }

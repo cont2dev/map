@@ -29,12 +29,22 @@ class TripManager
     
     func startTracking() {
         monitor.startObserver()
+        createRouteNStartMonitor()
+    }
+    
+    func stopTracking() {
+        tracker.stopTracking()
+        createRouteNStartMonitor()
+    }
+    
+    func createRouteNStartMonitor() {
         createRouteCommit()
-
+        
         if let event = currentEvent {
             tracker.startTrcking(it: event as! Route)
             monitor.startMonitor()
         }
+
     }
     
     func startTrip() {
@@ -49,5 +59,6 @@ class TripManager
     init() {
         tracker = routeTracker()
         monitor = Monitor()
+        monitor.tripManager = self
     }
 }

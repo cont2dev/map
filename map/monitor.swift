@@ -12,16 +12,26 @@ class Monitor
 {
     var timer:Timer
     let observer:mediaObserver
-
+    var timeInterval:Double
+    var tripManager:TripManager?
     
     func startObserver() {
         observer.startHooking()
     }
+    
     func startMonitor() {
+        Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: Selector(("stopTracking")), userInfo: nil, repeats: false)
+    }
+    
+    func stopTracking() {
+        if let tripManager = tripManager {
+            tripManager.stopTracking()
+        }
     }
     
     init() {
         observer = mediaObserver()
         timer = Timer()
+        timeInterval = 60.0
     }
 }
