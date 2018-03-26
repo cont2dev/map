@@ -29,6 +29,10 @@ class Monitor
         }
     }
     
+    func stopMonitor() {
+        observer.stopHooking()
+    }
+    
     init() {
         observer = mediaObserver()
         timer = Timer()

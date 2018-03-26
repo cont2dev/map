@@ -56,6 +56,13 @@ class TripManager
         startTracking()
     }
     
+    func endTrip() {
+        monitor.stopMonitor()
+        tracker.stopTracking()
+        currentEvent = git.createCommite(type: .end, with: (currentTrip?.member)!)
+        currentTrip?.commitList.append(currentEvent!)
+    }
+    
     init() {
         tracker = routeTracker()
         monitor = Monitor()

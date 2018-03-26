@@ -28,5 +28,6 @@ class routeTracker
     
     func stopTracking() {
         tracking = false
+        currentRoute = nil
     }
 }
