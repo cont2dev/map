@@ -47,7 +47,7 @@ enum eventType {
     case start
     case end
     case pause
-    case restart
+    case resume
     case route
     case photo
     case video
