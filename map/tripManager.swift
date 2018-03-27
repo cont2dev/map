@@ -78,7 +78,7 @@ class TripManager
         currentTrip?.commitList.append(currentEvent!)
     }
     
-    func stopTrip() {
+    func pauseTrip() {
         monitor.stopMonitor()
         tracker.stopTracking()
         currentEvent = git.createCommite(type: .pause, with: (currentTrip?.member)!)
