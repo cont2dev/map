@@ -29,6 +29,12 @@ class Monitor
         }
     }
     
+    func hook(media: Media) {
+        if let tripManager = tripManager {
+            tripManager.hook(media: media)
+        }
+    }
+    
     func stopMonitor() {
         observer.stopHooking()
     }
@@ -37,5 +43,6 @@ class Monitor
         observer = mediaObserver()
         timer = Timer()
         timeInterval = 60.0
+        observer.monitor = self
     }
 }

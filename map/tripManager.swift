@@ -44,7 +44,22 @@ class TripManager
             tracker.startTrcking(it: event as! Route)
             monitor.startMonitor()
         }
-
+    }
+    
+    func createPhotoCommit(photo:photo) {
+        currentEvent = git.createCommite(type: .photo, with: (currentTrip?.member)!)
+        currentTrip?.commitList.append(currentEvent!)
+    }
+    
+    func hook(media:Media) {
+        stopTracking()
+        
+        if media is photo {
+            createPhotoCommit(photo: media as! photo)
+        }
+        
+        createRouteCommit()
+        startTracking()
     }
     
     func startTrip() {

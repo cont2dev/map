@@ -10,11 +10,26 @@ import Foundation
 
 class mediaObserver
 {
+    var monitor:Monitor? = nil
+    var observe:Bool
+    
+    init() {
+        observe = true
+    }
+    
     func startHooking() {
-        
+        while (observe) {
+            let hookedData = hookMedia()
+            
+            monitor?.hook(media: hookedData)
+        }
+    }
+    
+    private func hookMedia() -> Media {
+        return photo()
     }
     
     func stopHooking() {
-        
+        observe = false
     }
 }

@@ -16,6 +16,7 @@
 		2879219A204D701500DED41C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28792198204D701500DED41C /* LaunchScreen.storyboard */; };
 		287921A5204D701500DED41C /* mapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287921A4204D701500DED41C /* mapTests.swift */; };
 		287921B0204D701500DED41C /* mapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287921AF204D701500DED41C /* mapUITests.swift */; };
+		2898B793206A6D82005E2BA9 /* media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2898B792206A6D82005E2BA9 /* media.swift */; };
 		289D25B0204EAA55008038AD /* commit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289D25AF204EAA55008038AD /* commit.swift */; };
 		289D25B2204EB590008038AD /* trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289D25B1204EB590008038AD /* trip.swift */; };
 		28AE4FC920612A9E007114BA /* git.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AE4FC820612A9E007114BA /* git.swift */; };
@@ -57,6 +58,7 @@
 		287921AB204D701500DED41C /* mapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mapUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		287921AF204D701500DED41C /* mapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapUITests.swift; sourceTree = "<group>"; };
 		287921B1204D701600DED41C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2898B792206A6D82005E2BA9 /* media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = media.swift; sourceTree = "<group>"; };
 		289D25AF204EAA55008038AD /* commit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = commit.swift; sourceTree = "<group>"; };
 		289D25B1204EB590008038AD /* trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = trip.swift; sourceTree = "<group>"; };
 		28AE4FC820612A9E007114BA /* git.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = git.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				289D25AF204EAA55008038AD /* commit.swift */,
 				289D25B1204EB590008038AD /* trip.swift */,
 				2879219B204D701500DED41C /* Info.plist */,
+				2898B792206A6D82005E2BA9 /* media.swift */,
 			);
 			path = map;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2898B793206A6D82005E2BA9 /* media.swift in Sources */,
 				28AE4FCB20613543007114BA /* routeTracker.swift in Sources */,
 				28656B2C2057E0FC00C0CEDE /* tripManager.swift in Sources */,
 				28792195204D701500DED41C /* map.xcdatamodeld in Sources */,
