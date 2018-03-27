@@ -37,6 +37,71 @@ class Route: commit {
     
 }
 
+class End: commit {
+    var type: eventType
+    var members = [Member]()
+    let time:Date
+    
+    required init(_ members: [Member]) {
+        type = .end
+        time = Date()
+        if members.count > 0 {
+            self.members += members
+        }
+    }
+}
+
+class Pause: commit {
+    var type: eventType
+    var members = [Member]()
+    let time:Date
+    
+    required init(_ members: [Member]) {
+        type = .pause
+        time = Date()
+        if members.count > 0 {
+            self.members += members
+        }
+    }
+}
+
+class Resume: commit {
+    var type: eventType
+    var members = [Member]()
+    let time:Date
+    
+    required init(_ members: [Member]) {
+        type = .resume
+        time = Date()
+        if members.count > 0 {
+            self.members += members
+        }
+    }
+}
+
+class Photo: commit {
+    var type: eventType
+    var members = [Member]()
+    var photo: photo?
+    
+    required init(_ members: [Member]) {
+        type = .resume
+        if members.count > 0 {
+            self.members += members
+        }
+        photo = nil
+    }
+
+     init(_ members: [Member], media:photo) {
+        type = .resume
+        if members.count > 0 {
+            self.members += members
+        }
+
+        photo = media
+    }
+}
+
 protocol commit {
     var type:eventType {get set}
     var members:[Member] {get set}

@@ -10,13 +10,21 @@ import Foundation
 
 class git
 {
-    static func createCommite(type:eventType, with member:[Member]) -> commit? {
+    static func createCommite(type:eventType, with member:[Member], media:Media? = nil) -> commit? {
         var event:commit?
         switch type {
         case .start:
             event = Start(member)
         case .route:
             event = Route(member)
+        case .end:
+            event = End(member)
+        case .pause:
+            event = Pause(member)
+        case .resume:
+            event = Resume(member)
+        case .photo:
+            event = Photo(member, media: media as! photo)
         default:
             print("\(type) is not implimented")
         }
