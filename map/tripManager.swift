@@ -17,34 +17,13 @@ class TripManager
     var tracker:routeTracker
     let monitor:Monitor
     
-    func createStartCommit() {
-        currentEvent = git.createCommite(type: .start, with: (currentTrip?.member)!)
-        currentTrip?.commitList.append(currentEvent!)
-    }
-    
-    func createRouteCommit() {
-        currentEvent = git.createCommite(type: .route, with: (currentTrip?.member)!)
-        currentTrip?.commitList.append(currentEvent!)
-    }
-
-    func createPhotoCommit(photo:photo) {
-        currentEvent = git.createCommite(type: .photo, with: (currentTrip?.member)!)
-        currentTrip?.commitList.append(currentEvent!)
-    }
-
-    func createResumeCommit() {
-        currentEvent = git.createCommite(type: .resume, with: (currentTrip?.member)!)
-        currentTrip?.commitList.append(currentEvent!)
-    }
-    
-    func createEndCommit() {
-        currentEvent = git.createCommite(type: .end, with: (currentTrip?.member)!)
-        currentTrip?.commitList.append(currentEvent!)
-    }
-    
-    func createPauseCommit() {
-        currentEvent = git.createCommite(type: .pause, with: (currentTrip?.member)!)
-        currentTrip?.commitList.append(currentEvent!)
+    func createCommit(_ event:eventType, media:Media? = nil) {
+        currentEvent = git.createCommite(type: event, with: (currentTrip?.member)!, media: media)
+        if var trip = currentTrip {
+            if let event = currentEvent {
+                trip.commitList.append(event)
+            }
+        }
     }
     
     func startTracking() {
@@ -58,7 +37,7 @@ class TripManager
     }
     
     func createRouteNStartMonitor() {
-        createRouteCommit()
+        createCommit(.route)
         
         if let event = currentEvent {
             tracker.startTrcking(it: event as! Route)
@@ -70,10 +49,10 @@ class TripManager
         tracker.stopTracking()
         
         if media is photo {
-            createPhotoCommit(photo: media as! photo)
+            createCommit(.photo, media: media)
         }
-        
-        createRouteCommit()
+
+        createCommit(.route)
         startTracking()
     }
     
@@ -82,24 +61,24 @@ class TripManager
         let trip = Trip(with:defaultMember)
         trips.append(trip)
         currentTrip = trip
-        createStartCommit()
+        createCommit(.start)
         startTracking()
     }
     
     func endTrip() {
         monitor.stopMonitor()
         tracker.stopTracking()
-        createEndCommit()
+        createCommit(.end)
     }
     
     func pauseTrip() {
         monitor.stopMonitor()
         tracker.stopTracking()
-        createPauseCommit()
+        createCommit(.pause)
     }
     
     func resumeTrip() {
-        createResumeCommit()
+        createCommit(.resume)
         if let event = currentEvent {
             tracker.startTrcking(it: event as! Route)
             monitor.startMonitor()
