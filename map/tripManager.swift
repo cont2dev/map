@@ -26,13 +26,33 @@ class TripManager
         currentEvent = git.createCommite(type: .route, with: (currentTrip?.member)!)
         currentTrip?.commitList.append(currentEvent!)
     }
+
+    func createPhotoCommit(photo:photo) {
+        currentEvent = git.createCommite(type: .photo, with: (currentTrip?.member)!)
+        currentTrip?.commitList.append(currentEvent!)
+    }
+
+    func createResumeCommit() {
+        currentEvent = git.createCommite(type: .resume, with: (currentTrip?.member)!)
+        currentTrip?.commitList.append(currentEvent!)
+    }
+    
+    func createEndCommit() {
+        currentEvent = git.createCommite(type: .end, with: (currentTrip?.member)!)
+        currentTrip?.commitList.append(currentEvent!)
+    }
+    
+    func createPauseCommit() {
+        currentEvent = git.createCommite(type: .pause, with: (currentTrip?.member)!)
+        currentTrip?.commitList.append(currentEvent!)
+    }
     
     func startTracking() {
         monitor.startObserver()
         createRouteNStartMonitor()
     }
     
-    func stopTracking() {
+    func periodTracking() {
         tracker.stopTracking()
         createRouteNStartMonitor()
     }
@@ -45,14 +65,9 @@ class TripManager
             monitor.startMonitor()
         }
     }
-    
-    func createPhotoCommit(photo:photo) {
-        currentEvent = git.createCommite(type: .photo, with: (currentTrip?.member)!)
-        currentTrip?.commitList.append(currentEvent!)
-    }
-    
+
     func hook(media:Media) {
-        stopTracking()
+        tracker.stopTracking()
         
         if media is photo {
             createPhotoCommit(photo: media as! photo)
@@ -74,15 +89,21 @@ class TripManager
     func endTrip() {
         monitor.stopMonitor()
         tracker.stopTracking()
-        currentEvent = git.createCommite(type: .end, with: (currentTrip?.member)!)
-        currentTrip?.commitList.append(currentEvent!)
+        createEndCommit()
     }
     
     func pauseTrip() {
         monitor.stopMonitor()
         tracker.stopTracking()
-        currentEvent = git.createCommite(type: .pause, with: (currentTrip?.member)!)
-        currentTrip?.commitList.append(currentEvent!)
+        createPauseCommit()
+    }
+    
+    func resumeTrip() {
+        createResumeCommit()
+        if let event = currentEvent {
+            tracker.startTrcking(it: event as! Route)
+            monitor.startMonitor()
+        }
     }
     
     init() {

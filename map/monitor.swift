@@ -20,12 +20,12 @@ class Monitor
     }
     
     func startMonitor() {
-        Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: Selector(("stopTracking")), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: Selector(("periodTracking")), userInfo: nil, repeats: false)
     }
     
-    func stopTracking() {
+    func periodTracking() {
         if let tripManager = tripManager {
-            tripManager.stopTracking()
+            tripManager.periodTracking()
         }
     }
     
