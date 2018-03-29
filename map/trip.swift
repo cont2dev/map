@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Trip {
+class Trip {
     var name:String
     //var status:tripStatus = .idle
     var member = [Member]()
