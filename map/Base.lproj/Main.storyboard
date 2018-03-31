@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
-        <capability name="Baseline standard spacing" minToolsVersion="9.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -30,17 +28,14 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Amw-aj-nzf">
                                 <rect key="frame" x="337" y="61" width="22" height="22"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Wc-Sx-XaY">
-                                <rect key="frame" x="101" y="694.66666666666663" width="172" height="83.333333333333371"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="33" id="4T7-zf-zqi"/>
-                                </constraints>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S5i-nL-KWx">
+                                <rect key="frame" x="100" y="718" width="175" height="60"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <state key="normal" title="Start">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <state key="normal" title="START">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="action:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ER3-op-XvO"/>
+                                    <action selector="buttonTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="luj-99-vQh"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -48,15 +43,14 @@
                         <constraints>
                             <constraint firstItem="PYM-zu-dcw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="415-ai-aQp"/>
                             <constraint firstItem="KcZ-w5-LTU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="CNa-ee-syO"/>
-                            <constraint firstItem="0Wc-Sx-XaY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="101" id="FzV-ls-BJQ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="KcZ-w5-LTU" secondAttribute="bottom" id="Hs2-rG-V6d"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KcZ-w5-LTU" secondAttribute="trailing" id="Ijl-qo-eEW"/>
+                            <constraint firstItem="S5i-nL-KWx" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="K53-pr-LDQ"/>
                             <constraint firstItem="Amw-aj-nzf" firstAttribute="leading" secondItem="PYM-zu-dcw" secondAttribute="trailing" id="R53-IX-t8v"/>
                             <constraint firstItem="PYM-zu-dcw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="R6M-dL-2V6"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="0Wc-Sx-XaY" secondAttribute="bottom" id="TZD-JW-Ar9"/>
-                            <constraint firstItem="KcZ-w5-LTU" firstAttribute="baseline" secondItem="0Wc-Sx-XaY" secondAttribute="firstBaseline" constant="11.333333333333334" symbolType="layoutAnchor" id="ayW-w9-TuV"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="S5i-nL-KWx" secondAttribute="trailing" constant="100" id="S1k-vd-rE9"/>
                             <constraint firstItem="Amw-aj-nzf" firstAttribute="leading" secondItem="KcZ-w5-LTU" secondAttribute="trailing" constant="-38" id="baz-Qy-Gj9"/>
-                            <constraint firstItem="0Wc-Sx-XaY" firstAttribute="centerX" secondItem="KcZ-w5-LTU" secondAttribute="centerX" id="es1-h0-rd0"/>
+                            <constraint firstItem="S5i-nL-KWx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="ekT-Vb-ejk"/>
                             <constraint firstItem="KcZ-w5-LTU" firstAttribute="top" secondItem="Amw-aj-nzf" secondAttribute="bottom" constant="-39" id="hDe-no-5fy"/>
                             <constraint firstItem="KcZ-w5-LTU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ppf-JY-JTP"/>
                             <constraint firstItem="KcZ-w5-LTU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="sSs-DO-v1W"/>
@@ -66,7 +60,7 @@
                     </view>
                     <connections>
                         <outlet property="map" destination="KcZ-w5-LTU" id="TqW-ZH-jE7"/>
-                        <outlet property="startButton" destination="0Wc-Sx-XaY" id="3wT-99-Mnd"/>
+                        <outlet property="startButton" destination="S5i-nL-KWx" id="lj1-sX-OwW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

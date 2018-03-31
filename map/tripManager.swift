@@ -8,46 +8,46 @@
 
 import Foundation
 
-class TripManager: gitProtocol
-{
-    static let getManager = TripManager()
+class TripManager: gitProtocol {
     
-    private init() {
-        tracker = routeTracker()
-        monitor = Monitor()
-        monitor.tripManager = self
-    }
-
+    /*
+     * TODO: implementaion MULTI THREADING
+     */
+    
+    static let shared = TripManager()
+    
     var trips = [Trip]()
     var currentTrip:Trip?
     var currentEvent:commit?
     
-    var tracker:routeTracker
-    let monitor:Monitor
+    private init() {
+        
+    }
     
-    func createCommit(type:eventType, with member:[Member], media:Media? = nil) -> commit? {
-        var event:commit?
-        switch type {
-        case .start:
-            event = Start(member)
-        case .route:
-            event = Route(member)
-        case .end:
-            event = End(member)
-        case .pause:
-            event = Pause(member)
-        case .resume:
-            event = Resume(member)
-        case .photo:
-            event = Photo(member, media: media as! photo)
-        default:
-            print("\(type) is not implimented")
-        }
-        if let event = event {
-            return event
-        } else {
-            return nil
-        }
+    func createCommit(type: eventType, with member: [Member], media: Media?) -> commit? {
+        let event: commit?
+        
+        event = {
+            switch type {
+            case .start:
+                return Start(member) as commit
+            case .route:
+                return Route(member) as commit
+            case .end:
+                return End(member) as commit
+            case .pause:
+                return Pause(member) as commit
+            case .resume:
+                return Resume(member) as commit
+            case .photo:
+                return Photo(member, media: media as! photo) as commit
+            default:
+                print("\(type) is not implimented")
+                return nil
+            }
+        } ()
+        
+        return event
     }
 
     func createCommit(_ event:eventType, media:Media? = nil) -> commit? {
@@ -61,29 +61,28 @@ class TripManager: gitProtocol
     }
     
     func startTracking() {
-        monitor.startObserver()
-        createRouteNStartMonitor()
-    }
-    
-    func periodTracking() {
-        tracker.stopTracking()
-        createRouteNStartMonitor()
-    }
-    
-    func createRouteNStartMonitor() {
         currentEvent = createCommit(.route)
         if let event = currentEvent {
             pushCommit(event)
         }
         
         if let event = currentEvent {
-            tracker.startTrcking(it: event as! Route)
-            monitor.startMonitor()
+            Monitor.shared.startMonitor()
+            RouteTracker.shared.startTracking(it: event as! Route)
         }
     }
+    
+    func stopTracking() {
+        Monitor.shared.stopMonitor()
+        RouteTracker.shared.stopTracking()
+    }
+    
+    func periodTracking() {
+        
+    }
 
-    func hook(media:Media) {
-        tracker.stopTracking()
+    func hook(media: Media) {
+        stopTracking()
         
         if media is photo {
             currentEvent = createCommit(.photo, media: media)
@@ -96,45 +95,62 @@ class TripManager: gitProtocol
         if let event = currentEvent {
             pushCommit(event)
         }
+        
         startTracking()
     }
     
     func startTrip() {
         let defaultMember = Member(name: "default user", address: "email")
         let trip = Trip(with:defaultMember)
+        
+        // TODO: DEBUG
+        print("trip started")
+        
         trips.append(trip)
         currentTrip = trip
+        
         currentEvent = createCommit(.start)
         if let event = currentEvent {
             pushCommit(event)
         }
+        
         startTracking()
     }
     
     func endTrip() {
-        monitor.stopMonitor()
-        tracker.stopTracking()
+        // TODO: DEBUG
+        print("trip ended")
+        
+        Monitor.shared.stopMonitor()
+        RouteTracker.shared.stopTracking()
+        
         currentEvent = createCommit(.end)
+        
         if let event = currentEvent {
             pushCommit(event)
         }
     }
     
     func pauseTrip() {
-        monitor.stopMonitor()
-        tracker.stopTracking()
+        // TODO: DEBUG
+        print("trip paused")
+        
         currentEvent = createCommit(.pause)
         if let event = currentEvent {
             pushCommit(event)
+            stopTracking()
         }
     }
     
     func resumeTrip() {
+        // TODO: DEBUG
+        print("trip resumed")
+        
         currentEvent = createCommit(.resume)
+        
         if let event = currentEvent {
             pushCommit(event)
-            tracker.startTrcking(it: event as! Route)
-            monitor.startMonitor()
+            startTracking()
         }
     }
 }

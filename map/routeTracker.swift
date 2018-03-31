@@ -8,25 +8,43 @@
 
 import Foundation
 
-class routeTracker
-{
-    var tracking:Bool = true
-    var currentRoute:Route?
+class RouteTracker {
     
-    func trackingLoop() {
+    static let shared = RouteTracker()
+    
+    var tracking: Bool = true
+    var currentRoute: Route?
+    
+    // TODO: DEBUG
+    var count = 0
+    
+    private init() {
         
     }
     
-    func startTrcking(it event:Route)
-    {
+    func trackingLoop() {
+        // TODO: DEBUG
+        sleep(30)
+        print("tracked: \(count)")
+        count += 1
+    }
+    
+    func startTracking(it event: Route) {
+        // TODO: DEBUG
+        print("tracking started")
+        
         tracking = true
         currentRoute = event
+        
         while (tracking) {
             trackingLoop()
         }
     }
     
     func stopTracking() {
+        // TODO: DEBUG
+        print("tracking stopped")
+        
         tracking = false
         currentRoute = nil
     }

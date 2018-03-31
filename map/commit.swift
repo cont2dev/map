@@ -9,7 +9,7 @@
 import Foundation
 import CoreLocation
 
-class Start:commit {
+class Start: commit {
     var members = [Member]()
     var type: eventType
     let time:Date
@@ -17,8 +17,9 @@ class Start:commit {
     required init(_ members: [Member]) {
         type = .start
         time = Date()
-        if members.count > 0 {
-            self.members += members
+        
+        if self.members.count > 0 && members.count > 0 {
+            self.members = members
         }
     }
 }
@@ -30,8 +31,9 @@ class Route: commit {
     
     required init(_ members: [Member]) {
         type = .route
-        if members.count > 0 {
-            self.members += members
+
+        if self.members.count > 0 && members.count > 0 {
+            self.members = members
         }
     }
     
@@ -45,8 +47,9 @@ class End: commit {
     required init(_ members: [Member]) {
         type = .end
         time = Date()
-        if members.count > 0 {
-            self.members += members
+        
+        if self.members.count > 0 && members.count > 0 {
+            self.members = members
         }
     }
 }
@@ -59,8 +62,9 @@ class Pause: commit {
     required init(_ members: [Member]) {
         type = .pause
         time = Date()
-        if members.count > 0 {
-            self.members += members
+        
+        if self.members.count > 0 && members.count > 0 {
+            self.members = members
         }
     }
 }
@@ -73,8 +77,9 @@ class Resume: commit {
     required init(_ members: [Member]) {
         type = .resume
         time = Date()
-        if members.count > 0 {
-            self.members += members
+        
+        if self.members.count > 0 && members.count > 0 {
+            self.members = members
         }
     }
 }
@@ -86,25 +91,26 @@ class Photo: commit {
     
     required init(_ members: [Member]) {
         type = .resume
-        if members.count > 0 {
-            self.members += members
+        self.photo = nil
+        
+        if self.members.count > 0 && members.count > 0 {
+            self.members = members
         }
-        photo = nil
     }
 
-     init(_ members: [Member], media:photo) {
+    init(_ members: [Member], media: photo) {
         type = .resume
-        if members.count > 0 {
-            self.members += members
+        self.photo = media
+        
+        if self.members.count > 0 && members.count > 0 {
+            self.members = members
         }
-
-        photo = media
     }
 }
 
 protocol commit {
-    var type:eventType {get set}
-    var members:[Member] {get set}
+    var type: eventType {get set}
+    var members: [Member] {get set}
     init(_ members: [Member])
 }
 

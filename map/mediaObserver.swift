@@ -8,10 +8,14 @@
 
 import Foundation
 
-class mediaObserver
-{
-    var monitor:Monitor? = nil
-    var observe:Bool
+class MediaObserver {
+    
+    static let shared = MediaObserver()
+    
+    var observe: Bool
+    
+    // TODO: DEBUG
+    var count = 0
     
     init() {
         observe = true
@@ -21,7 +25,11 @@ class mediaObserver
         while (observe) {
             let hookedData = hookMedia()
             
-            monitor?.hook(media: hookedData)
+            // TODO: DEBUG
+            sleep(20)
+            print("hooked: \(count)")
+            count += 1
+            Monitor.shared.hook(media: hookedData)
         }
     }
     

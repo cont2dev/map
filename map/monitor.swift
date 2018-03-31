@@ -8,41 +8,47 @@
 
 import Foundation
 
-class Monitor
-{
-    var timer:Timer
-    let observer:mediaObserver
-    var timeInterval:Double
-    var tripManager:TripManager?
+class Monitor {
     
+    static let shared = Monitor()
+    
+    var timer: Timer
+    var timeInterval: Double
+    
+    private init() {
+        timer = Timer()
+        timeInterval = 5.0 // Temporary for test
+    }
     func startObserver() {
-        observer.startHooking()
+        // TODO: DEBUG
+        print("observer started")
+        MediaObserver.shared.startHooking()
     }
     
     func startMonitor() {
+        // TODO: DEBUG
+        print("monitor started")
+        
+        startObserver()
+        
         Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: Selector(("periodTracking")), userInfo: nil, repeats: false)
     }
     
     func periodTracking() {
-        if let tripManager = tripManager {
-            tripManager.periodTracking()
-        }
+        TripManager.shared.periodTracking()
+        
+        // TODO: DEBUG
+        print("Is this working?")
     }
     
     func hook(media: Media) {
-        if let tripManager = tripManager {
-            tripManager.hook(media: media)
-        }
+        TripManager.shared.hook(media: media)
     }
     
     func stopMonitor() {
-        observer.stopHooking()
-    }
-    
-    init() {
-        observer = mediaObserver()
-        timer = Timer()
-        timeInterval = 60.0
-        observer.monitor = self
+        // TODO: DEBUG
+        print("monitor stopped")
+        
+        MediaObserver.shared.stopHooking()
     }
 }

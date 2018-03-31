@@ -9,12 +9,12 @@
 import Foundation
 
 class Trip {
-    var name:String
-    //var status:tripStatus = .idle
+    var name: String
+    var status: tripStatus = .idle
     var member = [Member]()
     var commitList = [commit]()
     
-    init(withName name:String = "default trip", with member:Member) {
+    init(withName name: String = "default trip", with member: Member) {
         self.name = name
         self.member.append(member)
     }
