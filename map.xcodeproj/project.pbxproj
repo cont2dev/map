@@ -23,6 +23,7 @@
 		28AE4FCB20613543007114BA /* routeTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AE4FCA20613543007114BA /* routeTracker.swift */; };
 		28AE4FCD20613627007114BA /* mediaObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AE4FCC20613627007114BA /* mediaObserver.swift */; };
 		28AE4FCF206136B4007114BA /* monitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AE4FCE206136B4007114BA /* monitor.swift */; };
+		F24A8E10206FF30400F313F8 /* SaveFileTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24A8E0F206FF30400F313F8 /* SaveFileTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		28AE4FCA20613543007114BA /* routeTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = routeTracker.swift; sourceTree = "<group>"; };
 		28AE4FCC20613627007114BA /* mediaObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mediaObserver.swift; sourceTree = "<group>"; };
 		28AE4FCE206136B4007114BA /* monitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = monitor.swift; sourceTree = "<group>"; };
+		F24A8E0F206FF30400F313F8 /* SaveFileTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFileTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 				289D25B1204EB590008038AD /* trip.swift */,
 				2879219B204D701500DED41C /* Info.plist */,
 				2898B792206A6D82005E2BA9 /* media.swift */,
+				F24A8E0F206FF30400F313F8 /* SaveFileTest.swift */,
 			);
 			path = map;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				289D25B2204EB590008038AD /* trip.swift in Sources */,
 				2879218F204D701500DED41C /* ViewController.swift in Sources */,
 				2879218D204D701500DED41C /* AppDelegate.swift in Sources */,
+				F24A8E10206FF30400F313F8 /* SaveFileTest.swift in Sources */,
 				289D25B0204EAA55008038AD /* commit.swift in Sources */,
 				28AE4FCF206136B4007114BA /* monitor.swift in Sources */,
 				28AE4FCD20613627007114BA /* mediaObserver.swift in Sources */,
