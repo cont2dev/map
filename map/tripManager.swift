@@ -10,6 +10,14 @@ import Foundation
 
 class TripManager: gitProtocol
 {
+    static let getManager = TripManager()
+    
+    private init() {
+        tracker = routeTracker()
+        monitor = Monitor()
+        monitor.tripManager = self
+    }
+
     var trips = [Trip]()
     var currentTrip:Trip?
     var currentEvent:commit?
@@ -128,11 +136,5 @@ class TripManager: gitProtocol
             tracker.startTrcking(it: event as! Route)
             monitor.startMonitor()
         }
-    }
-    
-    init() {
-        tracker = routeTracker()
-        monitor = Monitor()
-        monitor.tripManager = self
     }
 }
