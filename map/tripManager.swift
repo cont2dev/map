@@ -30,17 +30,17 @@ class TripManager: gitProtocol {
         event = {
             switch type {
             case .start:
-                return Start(member) as commit
+                return Start(member)
             case .route:
-                return Route(member) as commit
+                return Route(member)
             case .end:
-                return End(member) as commit
+                return End(member)
             case .pause:
-                return Pause(member) as commit
+                return Pause(member)
             case .resume:
-                return Resume(member) as commit
+                return Resume(member)
             case .photo:
-                return Photo(member, media: media as! photo) as commit
+                return Photo(member, media: media as! photo)
             default:
                 print("\(type) is not implimented")
                 return nil
