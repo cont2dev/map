@@ -55,7 +55,7 @@ class TripManager: gitProtocol {
     }
     
     func pushCommit(_ commit:commit) {
-        if var trip = currentTrip {
+        if let trip = currentTrip {
             trip.commitList.append(commit)
         }
     }
