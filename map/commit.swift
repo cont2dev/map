@@ -114,13 +114,13 @@ protocol commit {
     init(_ members: [Member])
 }
 
-enum eventType {
-    case start
-    case end
-    case pause
-    case resume
-    case route
-    case photo
-    case video
-    case memo
+enum eventType: String {
+    case start = "Start"
+    case end = "End"
+    case pause = "Pause"
+    case resume = "Resume"
+    case route = "Route"
+    case photo = "Photo"
+    case video = "Video"
+    case memo = "Memo"
 }
