@@ -15,7 +15,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var startButton: UIButton!
     
     @IBAction func buttonTouchUp(_ sender: UIButton) {
-        TripManager.shared.startTrip()
+        if TripManager.shared.currentTrip == nil {
+            TripManager.shared.startTrip()
+            startButton.setTitle("END", for: UIControlState.normal)
+        } else {
+            TripManager.shared.endTrip()
+            startButton.setTitle("START", for: UIControlState.normal)
+        }
     }
     
     override func viewDidLoad() {
