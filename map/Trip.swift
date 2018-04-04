@@ -12,7 +12,7 @@ class Trip {
     var name: String
     var status: tripStatus = .idle
     var member = [Member]()
-    var commitList = [commit]()
+    var history = [Record]()
     
     init(withName name: String = "default trip", with member: Member) {
         self.name = name
@@ -32,6 +32,6 @@ struct location {
 
 struct Member
 {
-    let name:String
-    var address:String
+    let name: String
+    var address: String
 }

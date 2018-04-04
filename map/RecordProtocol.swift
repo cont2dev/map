@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol gitProtocol {
-    func createCommit(type:eventType, with member:[Member], media:Media?) -> commit?
+protocol RecordProtocol {
+    func createRecord(type:eventType, with member:[Member], media:Media?) -> Record?
 }

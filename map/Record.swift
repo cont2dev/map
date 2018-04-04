@@ -9,10 +9,10 @@
 import Foundation
 import CoreLocation
 
-class Start: commit {
+class Start: Record {
     var members = [Member]()
     var type: eventType
-    let time:Date
+    let time: Date
     
     required init(_ members: [Member]) {
         type = .start
@@ -24,7 +24,7 @@ class Start: commit {
     }
 }
 
-class Route: commit {
+class Route: Record {
     var type: eventType
     var members = [Member]()
     var routes = [CLLocation]()
@@ -39,10 +39,10 @@ class Route: commit {
     
 }
 
-class End: commit {
+class End: Record {
     var type: eventType
     var members = [Member]()
-    let time:Date
+    let time: Date
     
     required init(_ members: [Member]) {
         type = .end
@@ -54,10 +54,10 @@ class End: commit {
     }
 }
 
-class Pause: commit {
+class Pause: Record {
     var type: eventType
     var members = [Member]()
-    let time:Date
+    let time: Date
     
     required init(_ members: [Member]) {
         type = .pause
@@ -69,10 +69,10 @@ class Pause: commit {
     }
 }
 
-class Resume: commit {
+class Resume: Record {
     var type: eventType
     var members = [Member]()
-    let time:Date
+    let time: Date
     
     required init(_ members: [Member]) {
         type = .resume
@@ -84,7 +84,7 @@ class Resume: commit {
     }
 }
 
-class Photo: commit {
+class Photo: Record {
     var type: eventType
     var members = [Member]()
     var photo: photo?
@@ -108,7 +108,7 @@ class Photo: commit {
     }
 }
 
-protocol commit {
+protocol Record {
     var type: eventType {get set}
     var members: [Member] {get set}
     init(_ members: [Member])

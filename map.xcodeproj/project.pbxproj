@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		28656B2C2057E0FC00C0CEDE /* tripManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28656B2B2057E0FC00C0CEDE /* tripManager.swift */; };
+		28656B2C2057E0FC00C0CEDE /* TripManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28656B2B2057E0FC00C0CEDE /* TripManager.swift */; };
 		2879218D204D701500DED41C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2879218C204D701500DED41C /* AppDelegate.swift */; };
 		2879218F204D701500DED41C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2879218E204D701500DED41C /* ViewController.swift */; };
 		28792192204D701500DED41C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28792190204D701500DED41C /* Main.storyboard */; };
@@ -16,13 +16,13 @@
 		2879219A204D701500DED41C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28792198204D701500DED41C /* LaunchScreen.storyboard */; };
 		287921A5204D701500DED41C /* mapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287921A4204D701500DED41C /* mapTests.swift */; };
 		287921B0204D701500DED41C /* mapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287921AF204D701500DED41C /* mapUITests.swift */; };
-		2898B793206A6D82005E2BA9 /* media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2898B792206A6D82005E2BA9 /* media.swift */; };
-		289D25B0204EAA55008038AD /* commit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289D25AF204EAA55008038AD /* commit.swift */; };
-		289D25B2204EB590008038AD /* trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289D25B1204EB590008038AD /* trip.swift */; };
-		28AE4FC920612A9E007114BA /* git.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AE4FC820612A9E007114BA /* git.swift */; };
-		28AE4FCB20613543007114BA /* routeTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AE4FCA20613543007114BA /* routeTracker.swift */; };
-		28AE4FCD20613627007114BA /* mediaObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AE4FCC20613627007114BA /* mediaObserver.swift */; };
-		28AE4FCF206136B4007114BA /* monitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AE4FCE206136B4007114BA /* monitor.swift */; };
+		2898B793206A6D82005E2BA9 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2898B792206A6D82005E2BA9 /* Media.swift */; };
+		289D25B0204EAA55008038AD /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289D25AF204EAA55008038AD /* Record.swift */; };
+		289D25B2204EB590008038AD /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289D25B1204EB590008038AD /* Trip.swift */; };
+		28AE4FC920612A9E007114BA /* RecordProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AE4FC820612A9E007114BA /* RecordProtocol.swift */; };
+		28AE4FCB20613543007114BA /* RouteTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AE4FCA20613543007114BA /* RouteTracker.swift */; };
+		28AE4FCD20613627007114BA /* MediaHooker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AE4FCC20613627007114BA /* MediaHooker.swift */; };
+		28AE4FCF206136B4007114BA /* Monitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AE4FCE206136B4007114BA /* Monitor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,7 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		28656B2B2057E0FC00C0CEDE /* tripManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tripManager.swift; sourceTree = "<group>"; };
+		28656B2B2057E0FC00C0CEDE /* TripManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripManager.swift; sourceTree = "<group>"; };
 		28792189204D701500DED41C /* map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = map.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2879218C204D701500DED41C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2879218E204D701500DED41C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -58,13 +58,13 @@
 		287921AB204D701500DED41C /* mapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mapUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		287921AF204D701500DED41C /* mapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapUITests.swift; sourceTree = "<group>"; };
 		287921B1204D701600DED41C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2898B792206A6D82005E2BA9 /* media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = media.swift; sourceTree = "<group>"; };
-		289D25AF204EAA55008038AD /* commit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = commit.swift; sourceTree = "<group>"; };
-		289D25B1204EB590008038AD /* trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = trip.swift; sourceTree = "<group>"; };
-		28AE4FC820612A9E007114BA /* git.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = git.swift; sourceTree = "<group>"; };
-		28AE4FCA20613543007114BA /* routeTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = routeTracker.swift; sourceTree = "<group>"; };
-		28AE4FCC20613627007114BA /* mediaObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mediaObserver.swift; sourceTree = "<group>"; };
-		28AE4FCE206136B4007114BA /* monitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = monitor.swift; sourceTree = "<group>"; };
+		2898B792206A6D82005E2BA9 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
+		289D25AF204EAA55008038AD /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
+		289D25B1204EB590008038AD /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
+		28AE4FC820612A9E007114BA /* RecordProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordProtocol.swift; sourceTree = "<group>"; };
+		28AE4FCA20613543007114BA /* RouteTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteTracker.swift; sourceTree = "<group>"; };
+		28AE4FCC20613627007114BA /* MediaHooker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaHooker.swift; sourceTree = "<group>"; };
+		28AE4FCE206136B4007114BA /* Monitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monitor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,17 +117,17 @@
 			children = (
 				289D25AA204E1D9C008038AD /* Supporting files */,
 				28792190204D701500DED41C /* Main.storyboard */,
-				28656B2B2057E0FC00C0CEDE /* tripManager.swift */,
-				28AE4FC820612A9E007114BA /* git.swift */,
-				28AE4FCE206136B4007114BA /* monitor.swift */,
+				28656B2B2057E0FC00C0CEDE /* TripManager.swift */,
+				28AE4FC820612A9E007114BA /* RecordProtocol.swift */,
+				28AE4FCE206136B4007114BA /* Monitor.swift */,
 				28792198204D701500DED41C /* LaunchScreen.storyboard */,
 				2879218E204D701500DED41C /* ViewController.swift */,
-				28AE4FCA20613543007114BA /* routeTracker.swift */,
-				28AE4FCC20613627007114BA /* mediaObserver.swift */,
-				289D25AF204EAA55008038AD /* commit.swift */,
-				289D25B1204EB590008038AD /* trip.swift */,
+				28AE4FCA20613543007114BA /* RouteTracker.swift */,
+				28AE4FCC20613627007114BA /* MediaHooker.swift */,
+				289D25AF204EAA55008038AD /* Record.swift */,
+				289D25B1204EB590008038AD /* Trip.swift */,
 				2879219B204D701500DED41C /* Info.plist */,
-				2898B792206A6D82005E2BA9 /* media.swift */,
+				2898B792206A6D82005E2BA9 /* Media.swift */,
 			);
 			path = map;
 			sourceTree = "<group>";
@@ -294,17 +294,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2898B793206A6D82005E2BA9 /* media.swift in Sources */,
-				28AE4FCB20613543007114BA /* routeTracker.swift in Sources */,
-				28656B2C2057E0FC00C0CEDE /* tripManager.swift in Sources */,
+				2898B793206A6D82005E2BA9 /* Media.swift in Sources */,
+				28AE4FCB20613543007114BA /* RouteTracker.swift in Sources */,
+				28656B2C2057E0FC00C0CEDE /* TripManager.swift in Sources */,
 				28792195204D701500DED41C /* map.xcdatamodeld in Sources */,
-				28AE4FC920612A9E007114BA /* git.swift in Sources */,
-				289D25B2204EB590008038AD /* trip.swift in Sources */,
+				28AE4FC920612A9E007114BA /* RecordProtocol.swift in Sources */,
+				289D25B2204EB590008038AD /* Trip.swift in Sources */,
 				2879218F204D701500DED41C /* ViewController.swift in Sources */,
 				2879218D204D701500DED41C /* AppDelegate.swift in Sources */,
-				289D25B0204EAA55008038AD /* commit.swift in Sources */,
-				28AE4FCF206136B4007114BA /* monitor.swift in Sources */,
-				28AE4FCD20613627007114BA /* mediaObserver.swift in Sources */,
+				289D25B0204EAA55008038AD /* Record.swift in Sources */,
+				28AE4FCF206136B4007114BA /* Monitor.swift in Sources */,
+				28AE4FCD20613627007114BA /* MediaHooker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
