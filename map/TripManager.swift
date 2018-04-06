@@ -51,7 +51,7 @@ class TripManager: RecordProtocol {
     }
     
     func saveRecord(_ record: Record) {
-        if var trip = currentTrip {
+        if let trip = currentTrip {
             trip.history.append(record)
             
             // TODO: DEBUG
