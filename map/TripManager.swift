@@ -8,24 +8,20 @@
 
 import Foundation
 
-class TripManager: gitProtocol {
-    
-    /*
-     * TODO: implementaion MULTI THREADING
-     */
+class TripManager: RecordProtocol {
     
     static let shared = TripManager()
     
     var trips = [Trip]()
-    var currentTrip:Trip?
-    var currentEvent:commit?
+    var currentTrip: Trip?
+    var currentEvent: Record?
     
     private init() {
         
     }
     
-    func createCommit(type: eventType, with member: [Member], media: Media?) -> commit? {
-        let event: commit?
+    func createRecord(type: eventType, with member: [Member], media: Media?) -> Record? {
+        let event: Record?
         
         event = {
             switch type {
@@ -50,53 +46,46 @@ class TripManager: gitProtocol {
         return event
     }
 
-    func createCommit(_ event:eventType, media:Media? = nil) -> commit? {
-        return createCommit(type: event, with: (currentTrip?.member)!, media: media)
+    func createRecord(_ event:eventType, media:Media? = nil) -> Record? {
+        return createRecord(type: event, with: (currentTrip?.member)!, media: media)
     }
     
-    func pushCommit(_ commit:commit) {
+    func saveRecord(_ record: Record) {
         if let trip = currentTrip {
-            trip.commitList.append(commit)
+            trip.history.append(record)
+            
+            // TODO: DEBUG
+            print("\(trip.history)")
         }
     }
     
-    func startTracking() {
-        currentEvent = createCommit(.route)
-        if let event = currentEvent {
-            pushCommit(event)
-        }
+    func startMonitor() {
+        currentEvent = createRecord(.route)
         
         if let event = currentEvent {
-            Monitor.shared.startMonitor()
-            RouteTracker.shared.startTracking(it: event as! Route)
+            saveRecord(event)
+            
+            Monitor.shared.startTracking(routeRecord: event as! Route)
+            Monitor.shared.startHooking()
         }
     }
     
-    func stopTracking() {
-        Monitor.shared.stopMonitor()
-        RouteTracker.shared.stopTracking()
-    }
-    
-    func periodTracking() {
-        
+    func stopMonitor() {
+        Monitor.shared.stopTracking()
+        Monitor.shared.stopHooking()
     }
 
-    func hook(media: Media) {
-        stopTracking()
+    func hooked(media: Media) {
+        stopMonitor()
         
         if media is photo {
-            currentEvent = createCommit(.photo, media: media)
+            currentEvent = createRecord(.photo, media: media)
             if let event = currentEvent {
-                pushCommit(event)
+                saveRecord(event)
             }
         }
-
-        currentEvent = createCommit(.route)
-        if let event = currentEvent {
-            pushCommit(event)
-        }
         
-        startTracking()
+        startMonitor()
     }
     
     func startTrip() {
@@ -109,25 +98,24 @@ class TripManager: gitProtocol {
         trips.append(trip)
         currentTrip = trip
         
-        currentEvent = createCommit(.start)
+        currentEvent = createRecord(.start)
         if let event = currentEvent {
-            pushCommit(event)
+            saveRecord(event)
         }
         
-        startTracking()
+        startMonitor()
     }
     
     func endTrip() {
         // TODO: DEBUG
         print("trip ended")
         
-        Monitor.shared.stopMonitor()
-        RouteTracker.shared.stopTracking()
+        stopMonitor()
         
-        currentEvent = createCommit(.end)
+        currentEvent = createRecord(.end)
         
         if let event = currentEvent {
-            pushCommit(event)
+            saveRecord(event)
         }
     }
     
@@ -135,10 +123,10 @@ class TripManager: gitProtocol {
         // TODO: DEBUG
         print("trip paused")
         
-        currentEvent = createCommit(.pause)
+        currentEvent = createRecord(.pause)
         if let event = currentEvent {
-            pushCommit(event)
-            stopTracking()
+            saveRecord(event)
+            stopMonitor()
         }
     }
     
@@ -146,11 +134,11 @@ class TripManager: gitProtocol {
         // TODO: DEBUG
         print("trip resumed")
         
-        currentEvent = createCommit(.resume)
+        currentEvent = createRecord(.resume)
         
         if let event = currentEvent {
-            pushCommit(event)
-            startTracking()
+            saveRecord(event)
+            startMonitor()
         }
     }
 }
