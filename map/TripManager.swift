@@ -64,15 +64,19 @@ class TripManager: RecordProtocol {
     }
     
     func save(location: CLLocation) {
-        if let record = createRecord(.route, location: location) {
-            save(record: record)
+        if currentTrip != nil {
+            if let record = createRecord(.route, location: location) {
+                save(record: record)
+            }
         }
     }
 
     func hooked(media: Media) {
-        if media is photo {
-            if let record = createRecord(.photo, media: media) {
-                save(record: record)
+        if currentTrip != nil {
+            if media is photo {
+                if let record = createRecord(.photo, media: media) {
+                    save(record: record)
+                }
             }
         }
     }
@@ -80,7 +84,7 @@ class TripManager: RecordProtocol {
     func startTrip() {
         let defaultMember = Member(name: "default user", address: "email")
         let trip = Trip(with:defaultMember)
-        
+        trip.name = "\(Date.description).json"
         // TODO: DEBUG
         print("trip started")
         
@@ -104,6 +108,121 @@ class TripManager: RecordProtocol {
         if let record = createRecord(.end) {
             save(record: record)
             currentTrip?.status = .idle
+        }
+        saveByJson()
+        currentTrip = nil
+    }
+    
+    enum Directory {
+        // Only documents and other data that is user-generated, or that cannot otherwise be recreated by your application, should be stored in the <Application_Home>/Documents directory and will be automatically backed up by iCloud.
+        case documents
+        
+        // Data that can be downloaded again or regenerated should be stored in the <Application_Home>/Library/Caches directory. Examples of files you should put in the Caches directory include database cache files and downloadable content, such as that used by magazine, newspaper, and map applications.
+        case caches
+    }
+
+    fileprivate func getURL(for directory: Directory) -> URL {
+        var searchPathDirectory: FileManager.SearchPathDirectory
+        
+        switch directory {
+        case .documents:
+            searchPathDirectory = .documentDirectory
+        case .caches:
+            searchPathDirectory = .cachesDirectory
+        }
+        
+        if let url = FileManager.default.urls(for: searchPathDirectory, in: .userDomainMask).first {
+            return url
+        } else {
+            fatalError("Could not create URL for specified directory!")
+        }
+    }
+    
+    private func saveByJson() {
+        let jsonEncoder = JSONEncoder()
+        do {
+            let jsonData = try jsonEncoder.encode(currentTrip)
+            let jsonString = String(data: jsonData, encoding: .utf8)
+            print("JSON String : " + jsonString!)
+            
+            let url = getURL(for: .documents).appendingPathComponent((currentTrip?.name)!, isDirectory: false)
+            
+            if FileManager.default.fileExists(atPath: url.path) {
+                try FileManager.default.removeItem(at: url)
+            }
+            FileManager.default.createFile(atPath: url.path, contents: jsonData, attributes: nil)
+            
+            // TODO: should test.
+            let iCloudDocumentsURL = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent((currentTrip?.name)!)
+            
+            if iCloudDocumentsURL != nil {
+                //Create the Directory if it doesn't exist
+                if (!FileManager.default.fileExists(atPath: iCloudDocumentsURL!.path, isDirectory: nil)) {
+                    //This gets skipped after initial run saying directory exists, but still don't see it on iCloud
+                    try FileManager.default.createDirectory(at: iCloudDocumentsURL!, withIntermediateDirectories: true, attributes: nil)
+                }
+            } else {
+                print("iCloud is NOT working!")
+            }
+            
+            var isDir:ObjCBool = false
+            if (FileManager.default.fileExists(atPath: iCloudDocumentsURL!.path, isDirectory: &isDir)) {
+                try FileManager.default.removeItem(at: iCloudDocumentsURL!)
+            }
+            
+            try FileManager.default.copyItem(at: url, to: iCloudDocumentsURL!)
+            
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
+    
+    func copyDocumentsToiCloudDrive() {
+        var error: NSError?
+        let iCloudDocumentsURL = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent((currentTrip?.name)!)
+        
+        do{
+            //is iCloud working?
+            if  iCloudDocumentsURL != nil {
+                //Create the Directory if it doesn't exist
+                if (!FileManager.default.fileExists(atPath: iCloudDocumentsURL!.path, isDirectory: nil)) {
+                    //This gets skipped after initial run saying directory exists, but still don't see it on iCloud
+                    try FileManager.default.createDirectory(at: iCloudDocumentsURL!, withIntermediateDirectories: true, attributes: nil)
+                }
+            } else {
+                print("iCloud is NOT working!")
+                //  return
+            }
+            
+            if error != nil {
+                print("Error creating iCloud DIR")
+            }
+            
+            //Set up directorys
+            let localDocumentsURL = FileManager.default.urls(for: FileManager.SearchPathDirectory.documentDirectory, in: .userDomainMask).last! as NSURL
+            
+            //Add txt file to my local folder
+            let myTextString = NSString(string: "HELLO WORLD")
+            let myLocalFile = localDocumentsURL.appendingPathComponent("myTextFile.txt")
+            _ = try myTextString.write(to: myLocalFile!, atomically: true, encoding: String.Encoding.utf8.rawValue)
+            
+            if ((error) != nil){
+                print("Error saving to local DIR")
+            }
+            
+            //If file exists on iCloud remove it
+            var isDir:ObjCBool = false
+            if (FileManager.default.fileExists(atPath: iCloudDocumentsURL!.path, isDirectory: &isDir)) {
+                try FileManager.default.removeItem(at: iCloudDocumentsURL!)
+            }
+            
+            //copy from my local to iCloud
+            if error == nil {
+                try FileManager.default.copyItem(at: localDocumentsURL as URL, to: iCloudDocumentsURL!)
+            }
+        }
+        catch{
+            print("Error creating a file")
         }
     }
     
