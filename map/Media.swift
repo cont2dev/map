@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol Media {
+protocol Media: Codable {
 }
 
 class photo: Media {
