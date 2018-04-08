@@ -100,7 +100,7 @@ class Photo: Record {
     var photo: photo?
     
     required init(_ members: [Member]) {
-        type = .resume
+        type = .photo
         self.photo = nil
         
         if members.count > 0 {
