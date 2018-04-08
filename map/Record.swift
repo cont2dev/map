@@ -18,7 +18,7 @@ class Start: Record {
         type = .start
         time = Date()
         
-        if self.members.count > 0 && members.count > 0 {
+        if members.count > 0 {
             self.members = members
         }
     }
@@ -32,7 +32,7 @@ class Route: Record {
     required init(_ members: [Member]) {
         type = .route
 
-        if self.members.count > 0 && members.count > 0 {
+        if members.count > 0 {
             self.members = members
         }
     }
@@ -48,7 +48,7 @@ class End: Record {
         type = .end
         time = Date()
         
-        if self.members.count > 0 && members.count > 0 {
+        if members.count > 0 {
             self.members = members
         }
     }
@@ -63,7 +63,7 @@ class Pause: Record {
         type = .pause
         time = Date()
         
-        if self.members.count > 0 && members.count > 0 {
+        if members.count > 0 {
             self.members = members
         }
     }
@@ -78,7 +78,7 @@ class Resume: Record {
         type = .resume
         time = Date()
         
-        if self.members.count > 0 && members.count > 0 {
+        if members.count > 0 {
             self.members = members
         }
     }
@@ -93,7 +93,7 @@ class Photo: Record {
         type = .resume
         self.photo = nil
         
-        if self.members.count > 0 && members.count > 0 {
+        if members.count > 0 {
             self.members = members
         }
     }
@@ -102,7 +102,7 @@ class Photo: Record {
         type = .resume
         self.photo = media
         
-        if self.members.count > 0 && members.count > 0 {
+        if members.count > 0 {
             self.members = members
         }
     }
