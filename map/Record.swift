@@ -11,7 +11,7 @@ import CoreLocation
 
 class Start: Record {
     var members = [Member]()
-    var type: eventType
+    var type: recordType
     let time: Date
     
     required init(_ members: [Member]) {
@@ -25,22 +25,32 @@ class Start: Record {
 }
 
 class Route: Record {
-    var type: eventType
+    var type: recordType
     var members = [Member]()
-    var routes = [CLLocation]()
+    var location: CLLocation?
     
     required init(_ members: [Member]) {
         type = .route
+        location = nil
 
         if members.count > 0 {
             self.members = members
         }
     }
     
+    init (_ members: [Member], _ location: CLLocation) {
+        type = .route
+        
+        if members.count > 0 {
+            self.members = members
+        }
+        
+        self.location = location
+    }
 }
 
 class End: Record {
-    var type: eventType
+    var type: recordType
     var members = [Member]()
     let time: Date
     
@@ -55,7 +65,7 @@ class End: Record {
 }
 
 class Pause: Record {
-    var type: eventType
+    var type: recordType
     var members = [Member]()
     let time: Date
     
@@ -70,7 +80,7 @@ class Pause: Record {
 }
 
 class Resume: Record {
-    var type: eventType
+    var type: recordType
     var members = [Member]()
     let time: Date
     
@@ -85,7 +95,7 @@ class Resume: Record {
 }
 
 class Photo: Record {
-    var type: eventType
+    var type: recordType
     var members = [Member]()
     var photo: photo?
     
@@ -109,12 +119,12 @@ class Photo: Record {
 }
 
 protocol Record {
-    var type: eventType {get set}
+    var type: recordType {get set}
     var members: [Member] {get set}
     init(_ members: [Member])
 }
 
-enum eventType: String {
+enum recordType: String {
     case start = "Start"
     case end = "End"
     case pause = "Pause"

@@ -16,8 +16,8 @@ class Monitor {
         
     }
     
-    func startTracking(routeRecord event: Route) {
-        RouteTracker.shared.startTracking(routeRecord: event)
+    func startTracking() {
+        RouteTracker.shared.startTracking()
     }
     
     func stopTracking() {

@@ -7,13 +7,12 @@
 //
 
 import Foundation
+import CoreLocation
 
 class RouteTracker {
-    
     static let shared = RouteTracker()
     
     var isRunning: Bool
-    var currentRoute: Route?
     
     // TODO: DEBUG
     var tempThreadQueue: DispatchQueue
@@ -32,16 +31,15 @@ class RouteTracker {
         sleep(3)
         DispatchQueue.main.async {
             print("tracked: \(self.count)")
+            TripManager.shared.save(location: CLLocation())
         }
 
         self.count += 1
     }
     
-    func startTracking(routeRecord event: Route) {
+    func startTracking() {
         // TODO: DEBUG
         print("tracking started")
-        self.currentRoute = event
-        
         self.tempThread = DispatchWorkItem {
             while (self.isRunning) {
                 self.trackingLoop()
@@ -62,6 +60,5 @@ class RouteTracker {
         }
         
         self.isRunning = false
-        self.currentRoute = nil
     }
 }

@@ -7,7 +7,8 @@
 //
 
 import Foundation
+import CoreLocation
 
 protocol RecordProtocol {
-    func createRecord(type:eventType, with member:[Member], media:Media?) -> Record?
+    func createRecord(type:recordType, with member:[Member], media:Media?, location: CLLocation?) -> Record?
 }
