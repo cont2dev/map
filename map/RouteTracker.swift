@@ -31,7 +31,7 @@ class RouteTracker {
         sleep(3)
         DispatchQueue.main.async {
             print("tracked: \(self.count)")
-            TripManager.shared.save(location: CLLocation())
+            Monitor.shared.save(location: CLLocation())
         }
 
         self.count += 1

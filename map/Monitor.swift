@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 class Monitor {
     
@@ -22,6 +23,10 @@ class Monitor {
     
     func stopTracking() {
         RouteTracker.shared.stopTracking()
+    }
+    
+    func save(location: CLLocation) {
+        TripManager.shared.save(location: location)
     }
 
     func startHooking() {
