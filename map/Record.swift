@@ -109,7 +109,7 @@ class Photo: Record {
     }
 
     init(_ members: [Member], media: photo) {
-        type = .resume
+        type = .photo
         self.photo = media
         
         if members.count > 0 {
