@@ -44,7 +44,7 @@ class TripManager: RecordProtocol {
         return createRecord(type: type, with: (currentTrip?.member)!, media: media, location: location)
     }
 
-    func saveRecord(_ record: Record) {
+    func save(record: Record) {
         if let trip = currentTrip {
             trip.history.append(record)
             
@@ -65,14 +65,14 @@ class TripManager: RecordProtocol {
     
     func save(location: CLLocation) {
         if let record = createRecord(.route, location: location) {
-            saveRecord(record)
+            save(record: record)
         }
     }
 
     func hooked(media: Media) {
         if media is photo {
             if let record = createRecord(.photo, media: media) {
-                saveRecord(record)
+                save(record: record)
             }
         }
     }
@@ -88,7 +88,7 @@ class TripManager: RecordProtocol {
         currentTrip = trip
         
         if let record = createRecord(.start) {
-            saveRecord(record)
+            save(record: record)
             currentTrip?.status = .traveling
         }
         
@@ -102,7 +102,7 @@ class TripManager: RecordProtocol {
         stopMonitor()
         
         if let record = createRecord(.end) {
-            saveRecord(record)
+            save(record: record)
             currentTrip?.status = .idle
         }
     }
@@ -112,7 +112,7 @@ class TripManager: RecordProtocol {
         print("trip paused")
         
         if let record = createRecord(.pause) {
-            saveRecord(record)
+            save(record: record)
             stopMonitor()
             currentTrip?.status = .idle
         }
@@ -123,7 +123,7 @@ class TripManager: RecordProtocol {
         print("trip resumed")
         
         if let record = createRecord(.resume) {
-            saveRecord(record)
+            save(record: record)
             startMonitor()
             currentTrip?.status = .traveling
         }
