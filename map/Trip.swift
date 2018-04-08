@@ -27,9 +27,6 @@ enum tripStatus {
     case garbage
 }
 
-struct location {
-}
-
 struct Member
 {
     let name: String
