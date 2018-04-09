@@ -9,17 +9,19 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var startButton: UIButton!
     
+    var points:[CLLocationCoordinate2D] = []
     @IBAction func buttonTouchUp(_ sender: UIButton) {
         if TripManager.shared.currentTrip == nil {
-            TripManager.shared.startTrip()
+            TripManager.shared.startTrip(viewController: self)
             startButton.setTitle("END", for: UIControlState.normal)
         } else {
             TripManager.shared.endTrip()
+            points.removeAll()
             startButton.setTitle("START", for: UIControlState.normal)
         }
     }
@@ -27,6 +29,25 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        map.delegate = self
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if overlay is MKPolyline {
+            let renderer = MKPolylineRenderer(overlay: overlay)
+            renderer.strokeColor = UIColor.cyan
+            renderer.lineWidth = 3
+            return renderer
+        }
+        return MKOverlayRenderer()
+    }
+    
+    func save(location: CLLocationCoordinate2D) {
+        points.append(location)
+        
+        let polyline = MKPolyline(coordinates: &points, count: points.count)
+        
+        map.add(polyline)
     }
     
     override func didReceiveMemoryWarning() {

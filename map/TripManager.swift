@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import UIKit
 
 class TripManager: RecordProtocol {
     
@@ -67,6 +68,7 @@ class TripManager: RecordProtocol {
         if currentTrip != nil {
             if let record = createRecord(.route, location: location) {
                 save(record: record)
+                viewController?.save(location: location.coordinate)
             }
         }
     }
@@ -81,7 +83,10 @@ class TripManager: RecordProtocol {
         }
     }
     
-    func startTrip() {
+    // TODO: viewcontroller shuold be removed.
+    var viewController: ViewController?
+    
+    func startTrip(viewController: ViewController) {
         let defaultMember = Member(name: "default user", address: "email")
         let trip = Trip(with:defaultMember)
         trip.name = "\(Date.description).json"
@@ -95,7 +100,7 @@ class TripManager: RecordProtocol {
             save(record: record)
             currentTrip?.status = .traveling
         }
-        
+        self.viewController = viewController
         startMonitor()
     }
     
