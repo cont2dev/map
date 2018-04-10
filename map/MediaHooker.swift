@@ -29,14 +29,15 @@ class MediaHooker {
         // TODO: DEBUG
         let hookedData = self.hookMedia()
         
-        sleep(5)
+        sleep(3600)
         DispatchQueue.main.async {
             print("hooked: \(self.count)")
         }
         
         self.count += 1
         
-        Monitor.shared.hooked(media: hookedData)
+        // Disable for testing in actual trip
+        //Monitor.shared.hooked(media: hookedData)
     }
     
     func startHooking() {
