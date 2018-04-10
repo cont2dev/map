@@ -229,6 +229,11 @@
 					28792188204D701500DED41C = {
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					2879219F204D701500DED41C = {
 						CreatedOnToolsVersion = 9.1;
