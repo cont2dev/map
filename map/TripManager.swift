@@ -88,8 +88,7 @@ class TripManager: RecordProtocol {
     
     func startTrip(viewController: ViewController) {
         let defaultMember = Member(name: "default user", address: "email")
-        let trip = Trip(with:defaultMember)
-        trip.name = "\(Date.description).json"
+        let trip = Trip(withName: "\(Date()).json", with: defaultMember)
         // TODO: DEBUG
         print("trip started")
         
