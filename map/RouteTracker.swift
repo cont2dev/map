@@ -9,56 +9,34 @@
 import Foundation
 import CoreLocation
 
-class RouteTracker {
+class RouteTracker: NSObject, CLLocationManagerDelegate {
     static let shared = RouteTracker()
     
-    var isRunning: Bool
+    let locationManager:CLLocationManager = CLLocationManager()
     
-    // TODO: DEBUG
-    var tempThreadQueue: DispatchQueue
-    var tempThread: DispatchWorkItem?
-    var count = 0
-    
-    private init() {
-        isRunning = false
-        tempThreadQueue = DispatchQueue(label: "trackingQueue")
-        tempThread = nil
+    private override init() {
+        super.init()
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+        
     }
     
-    func trackingLoop() {
-        // TODO: DEBUG
-        
-        sleep(3)
-        DispatchQueue.main.async {
-            print("tracked: \(self.count)")
-            Monitor.shared.save(location: CLLocation())
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        for currentLocation in locations {
+            print("\(index): \(currentLocation)")
         }
-
-        self.count += 1
+        Monitor.shared.save(location:locations.last!)
     }
     
     func startTracking() {
         // TODO: DEBUG
         print("tracking started")
-        self.tempThread = DispatchWorkItem {
-            while (self.isRunning) {
-                self.trackingLoop()
-            }
-        }
-
-        if let thread = self.tempThread {
-            self.isRunning = true
-            tempThreadQueue.async(execute: thread)
-        }
+        locationManager.startUpdatingLocation()
     }
     
     func stopTracking() {
         // TODO: DEBUG
         print("tracking stopped")
-        if let thread = self.tempThread {
-            thread.cancel()
-        }
-        
-        self.isRunning = false
+        locationManager.stopUpdatingLocation()
     }
 }
