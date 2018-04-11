@@ -149,12 +149,17 @@ class TripManager: RecordProtocol {
             let jsonString = String(data: jsonData, encoding: .utf8)
             print("JSON String : " + jsonString!)
             
-            let url = getURL(for: .documents).appendingPathComponent((currentTrip?.name)!, isDirectory: false)
+            let localDocumentsURL = FileManager.default.urls(for: FileManager.SearchPathDirectory.documentDirectory, in: .userDomainMask).last! as NSURL
+
+            //let url = getURL(for: .documents).appendingPathComponent((currentTrip?.name)!, isDirectory: false)
+            let url = localDocumentsURL.appendingPathComponent((currentTrip?.name)!)
+
             
-            if FileManager.default.fileExists(atPath: url.path) {
-                try FileManager.default.removeItem(at: url)
+            if FileManager.default.fileExists(atPath: url!.path) {
+                try FileManager.default.removeItem(at: url!)
             }
-            FileManager.default.createFile(atPath: url.path, contents: jsonData, attributes: nil)
+            _ = try jsonString?.write(to: url!, atomically: true, encoding: String.Encoding(rawValue: String.Encoding.utf8.rawValue))
+            //FileManager.default.createFile(atPath: url!.path, contents: jsonData, attributes: nil)
             
             // TODO: should test.
             let iCloudDocumentsURL = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent((currentTrip?.name)!)
@@ -165,17 +170,16 @@ class TripManager: RecordProtocol {
                     //This gets skipped after initial run saying directory exists, but still don't see it on iCloud
                     try FileManager.default.createDirectory(at: iCloudDocumentsURL!, withIntermediateDirectories: true, attributes: nil)
                 }
+                
+                var isDir:ObjCBool = false
+                if (FileManager.default.fileExists(atPath: iCloudDocumentsURL!.path, isDirectory: &isDir)) {
+                    try FileManager.default.removeItem(at: iCloudDocumentsURL!)
+                }
+                
+                try FileManager.default.copyItem(at: url!, to: iCloudDocumentsURL!)
             } else {
                 print("iCloud is NOT working!")
             }
-            
-            var isDir:ObjCBool = false
-            if (FileManager.default.fileExists(atPath: iCloudDocumentsURL!.path, isDirectory: &isDir)) {
-                try FileManager.default.removeItem(at: iCloudDocumentsURL!)
-            }
-            
-            try FileManager.default.copyItem(at: url, to: iCloudDocumentsURL!)
-            
         } catch {
             fatalError(error.localizedDescription)
         }

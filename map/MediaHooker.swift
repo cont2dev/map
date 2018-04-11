@@ -27,7 +27,7 @@ class MediaHooker {
     
     func hookingLoop() {
         // TODO: DEBUG
-        let hookedData = self.hookMedia()
+        //let hookedData = self.hookMedia()
         
         sleep(3600)
         DispatchQueue.main.async {
