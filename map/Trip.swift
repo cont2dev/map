@@ -33,26 +33,7 @@ extension Trip: Encodable {
         try container.encode(name, forKey: .name)
         try container.encode(status, forKey: .status)
         try container.encode(member, forKey: .member)
-        
-        var histories = container.nestedContainer(keyedBy: recordType.self, forKey: .history)
-        try history.reversed().forEach() { record in
-            switch record.type {
-            case .start:
-                try histories.encode(record as! Start, forKey: .start)
-            case .end:
-                try histories.encode(record as! End, forKey: .end)
-            case .pause:
-                try histories.encode(record as! Pause, forKey: .pause)
-            case .resume:
-                try histories.encode(record as! Resume, forKey: .resume)
-            case .route:
-                try histories.encode(record as! Route, forKey: .route)
-            case .photo:
-                try histories.encode(record as! Photo, forKey: .photo)
-            default:
-                print("not implimented")
-            }
-        }
+        try container.encode(history.map(AnyRecord.init), forKey: .history)
     }
 }
 /*

@@ -10,12 +10,12 @@ import Foundation
 import CoreLocation
 
 class Start: Record {
+    static var type: recordType = .start
+    
     var members = [Member]()
-    var type: recordType
     let time: Date
     
     required init(_ members: [Member]) {
-        type = .start
         time = Date()
         
         if members.count > 0 {
@@ -25,12 +25,12 @@ class Start: Record {
 }
 
 class Route: Record, Codable {
-    var type: recordType
+    static var type: recordType = .route
+    
     var members = [Member]()
     var location: CLLocation?
     
     required init(_ members: [Member]) {
-        type = .route
         location = nil
 
         if members.count > 0 {
@@ -39,8 +39,6 @@ class Route: Record, Codable {
     }
     
     init (_ members: [Member], _ location: CLLocation) {
-        type = .route
-        
         if members.count > 0 {
             self.members = members
         }
@@ -49,14 +47,12 @@ class Route: Record, Codable {
     }
     
     enum CodingKeys: String, CodingKey {
-        case type
         case members
         case location
     }
 
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        type = try values.decode(recordType.self, forKey: .type)
         members = try values.decode([Member].self, forKey: .members)
         let locationModel = try values.decode(Location.self, forKey: .location)
         location = CLLocation(model: locationModel)
@@ -105,12 +101,11 @@ extension CLLocation {
 }
 
 class End: Record {
-    var type: recordType
+    static var type: recordType = .end
     var members = [Member]()
     let time: Date
     
     required init(_ members: [Member]) {
-        type = .end
         time = Date()
         
         if members.count > 0 {
@@ -120,12 +115,11 @@ class End: Record {
 }
 
 class Pause: Record {
-    var type: recordType
+    static var type: recordType = .pause
     var members = [Member]()
     let time: Date
     
     required init(_ members: [Member]) {
-        type = .pause
         time = Date()
         
         if members.count > 0 {
@@ -135,12 +129,11 @@ class Pause: Record {
 }
 
 class Resume: Record {
-    var type: recordType
+    static var type: recordType = .resume
     var members = [Member]()
     let time: Date
     
     required init(_ members: [Member]) {
-        type = .resume
         time = Date()
         
         if members.count > 0 {
@@ -150,12 +143,11 @@ class Resume: Record {
 }
 
 class Photo: Record {
-    var type: recordType
+    static var type: recordType = .photo
     var members = [Member]()
     var photo: photo?
     
     required init(_ members: [Member]) {
-        type = .photo
         self.photo = nil
         
         if members.count > 0 {
@@ -164,7 +156,6 @@ class Photo: Record {
     }
 
     init(_ members: [Member], media: photo) {
-        type = .photo
         self.photo = media
         
         if members.count > 0 {
@@ -174,9 +165,34 @@ class Photo: Record {
 }
 
 protocol Record: Codable {
-    var type: recordType {get set}
+    static var type: recordType {get set}
     var members: [Member] {get set}
     init(_ members: [Member])
+}
+
+struct AnyRecord: Codable {
+    var base: Record
+    init(_ base: Record) {
+        self.base = base
+    }
+    
+    private enum CodingKeys: CodingKey {
+        case type, base
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        let type = try container.decode(recordType.self, forKey: .type)
+        self.base = try type.metatype.init(from: container.superDecoder(forKey: .base))
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+
+        try container.encodeIfPresent(type(of: base).type, forKey: .type)
+        try base.encode(to: container.superEncoder(forKey: .base))
+    }
 }
 
 enum recordType: String, Codable, CodingKey {
@@ -188,4 +204,18 @@ enum recordType: String, Codable, CodingKey {
     case photo
     case video
     case memo
+    
+    var metatype: Record.Type {
+        switch self {
+        case .start: return Start.self
+        case .end: return End.self
+        case .pause: return Pause.self
+        case .resume: return Resume.self
+        case .route: return Route.self
+        case .photo: return Photo.self
+        // unused behind.
+        case .video: return Photo.self
+        case .memo: return Photo.self
+        }
+    }
 }
