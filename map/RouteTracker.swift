@@ -32,6 +32,9 @@ class RouteTracker: NSObject, CLLocationManagerDelegate {
         // TODO: DEBUG
         print("tracking started")
         locationManager.startUpdatingLocation()
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.pausesLocationUpdatesAutomatically = false
+        locationManager.distanceFilter = 10
     }
     
     func stopTracking() {
