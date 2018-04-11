@@ -43,11 +43,16 @@ class ViewController: UIViewController, MKMapViewDelegate {
     }
     
     func save(location: CLLocationCoordinate2D) {
-        points.append(location)
-        
         let polyline = MKPolyline(coordinates: &points, count: points.count)
         
+        // We need to implement span values based on speed.
+        let span = MKCoordinateSpanMake(0.0275, 0.0275)
+        let region = MKCoordinateRegionMake(location, span)
+
         map.add(polyline)
+        self.map.setRegion(region, animated: true)
+        self.map.showsUserLocation = true
+        points.append(location)
     }
     
     override func didReceiveMemoryWarning() {
