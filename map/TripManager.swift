@@ -153,7 +153,6 @@ class TripManager: RecordProtocol {
 
             //let url = getURL(for: .documents).appendingPathComponent((currentTrip?.name)!, isDirectory: false)
             let url = localDocumentsURL.appendingPathComponent((currentTrip?.name)!)
-
             
             if FileManager.default.fileExists(atPath: url!.path) {
                 try FileManager.default.removeItem(at: url!)
@@ -182,55 +181,6 @@ class TripManager: RecordProtocol {
             }
         } catch {
             fatalError(error.localizedDescription)
-        }
-    }
-    
-    func copyDocumentsToiCloudDrive() {
-        var error: NSError?
-        let iCloudDocumentsURL = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent((currentTrip?.name)!)
-        
-        do{
-            //is iCloud working?
-            if  iCloudDocumentsURL != nil {
-                //Create the Directory if it doesn't exist
-                if (!FileManager.default.fileExists(atPath: iCloudDocumentsURL!.path, isDirectory: nil)) {
-                    //This gets skipped after initial run saying directory exists, but still don't see it on iCloud
-                    try FileManager.default.createDirectory(at: iCloudDocumentsURL!, withIntermediateDirectories: true, attributes: nil)
-                }
-            } else {
-                print("iCloud is NOT working!")
-                //  return
-            }
-            
-            if error != nil {
-                print("Error creating iCloud DIR")
-            }
-            
-            //Set up directorys
-            let localDocumentsURL = FileManager.default.urls(for: FileManager.SearchPathDirectory.documentDirectory, in: .userDomainMask).last! as NSURL
-            
-            //Add txt file to my local folder
-            let myTextString = NSString(string: "HELLO WORLD")
-            let myLocalFile = localDocumentsURL.appendingPathComponent("myTextFile.txt")
-            _ = try myTextString.write(to: myLocalFile!, atomically: true, encoding: String.Encoding.utf8.rawValue)
-            
-            if ((error) != nil){
-                print("Error saving to local DIR")
-            }
-            
-            //If file exists on iCloud remove it
-            var isDir:ObjCBool = false
-            if (FileManager.default.fileExists(atPath: iCloudDocumentsURL!.path, isDirectory: &isDir)) {
-                try FileManager.default.removeItem(at: iCloudDocumentsURL!)
-            }
-            
-            //copy from my local to iCloud
-            if error == nil {
-                try FileManager.default.copyItem(at: localDocumentsURL as URL, to: iCloudDocumentsURL!)
-            }
-        }
-        catch{
-            print("Error creating a file")
         }
     }
     
